@@ -100,8 +100,20 @@ class Stack:
 
 
 
-  def push(self):
-    self.stack.append(...)
+  def push(self, symbols : str):
+    truth = True
+    stack_list = []
+
+    if len(self.var_string) == 0 and symbols in "({[":
+      symbols_list = [s for s in symbols]
+      stack_list.append(symbols_list)
+      return
+
+    elif len(self.var_string) > 0 and symbols in ")}]":
+      stack_list = [l for l in self.var_string]
+      symbols_list = [s for s in symbols]
+      stack_list.append(symbols_list)
+
 
   def pop(self):
     self.stack.pop()
@@ -112,8 +124,8 @@ class Stack:
   def size(self):
     ...
 
-# s = "([]((([{}])){dds}))"
+s = "([]((([{}])){dds}))"
 # s = "[[{(pppp)[]}]"
-s = "}{}"
+# s = "}{}"
 g = Stack(s)
-g.isEmpty()
+g.push("pppp")
