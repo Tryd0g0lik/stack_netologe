@@ -13,14 +13,10 @@ class Stack:
     time_symbol : str
     bisic_leng_text = len(self.var_string)
     if len(self.var_string) != 0:
-      front_path_string = ''.join(reversed(self.var_string[0 : len(self.var_string)//2]))
       i = 0
 
       while verify:
-        for symbol in front_path_string:
-          # if symbol in "{([":
-          #   self.stack_front.append(symbol)
-
+        for symbol in self.var_string:
           for time_symbol in "}])":
 
             if symbol == "{" and time_symbol == "}" and symbol in self.var_string and time_symbol in self.var_string:
@@ -33,8 +29,9 @@ class Stack:
               truth = [truth for truth in old_str if truth in "}]){(["][1 : -1]
               if truth != []:
                 print("One symbol '}]){([' found")
-                exit()
-              if len(old_str) == 0:
+                return "Code 400"
+
+              if len(old_str) == 2:
                 self.stack_empty.append(old_str)
 
               result = self.var_string.replace(str(old_str), "")
@@ -53,9 +50,9 @@ class Stack:
               truth = [truth for truth in old_str if truth in "}]){(["][1:-1]
               if truth != []:
                 print("One symbol '}]){([' found")
-                exit()
+                return "Code 400"
 
-              if len(old_str) == 0:
+              if len(old_str) == 2:
                 self.stack_empty.append(old_str)
 
               result = self.var_string.replace(str(old_str), "")
@@ -74,9 +71,9 @@ class Stack:
               truth = [truth for truth in old_str if truth in "}]){(["][1:-1]
               if truth != []:
                 print("One symbol '}]){([' found")
-                exit()
+                return "Code 400"
 
-              if len(old_str) == 0:
+              if len(old_str) == 2:
                 self.stack_empty.append(old_str)
 
               result = self.var_string.replace(str(old_str), "")
@@ -87,19 +84,19 @@ class Stack:
           continue
 
         if len(self.var_string) == 0:
-          print("All symbol '}]){([' paired", f"Empty {self.stack_empty} and number: {len(self.stack_empty)}")
-          exit()
+          print("All symbol '}]){([' paired.", f"Empty {self.stack_empty} and number: {len(self.stack_empty)}")
+          return "Code 200"
         i +=1
         if i >= bisic_leng_text - 1:
-          print(f"ramins {self.var_string}, not find the paired", f"Empty {self.stack_empty} and number: {len(self.stack_empty)}")
+          print(f"ramins {self.var_string}, not find the paired.", f"Empty {self.stack_empty} and number: {len(self.stack_empty)}")
           verify = False
         # elif len(self.var_string) != 0:
         #   print(f"ramins {self.var_string}, not find the paired ")
         #   exit()
     else:
       if len(self.var_string) == 0:
-        print(f"ramins {self.var_string}, not find the paired", f"Empty {self.stack_empty} and number: {len(self.stack_empty)}")
-      exit()
+        print(f"ramins {self.var_string}, not find the paired.", f"Empty {self.stack_empty} and number: {len(self.stack_empty)}")
+      return "Code 400"
 
 
 
@@ -116,6 +113,7 @@ class Stack:
     ...
 
 # s = "([]((([{}])){dds}))"
-s = "[[{()}]"
+# s = "[[{(pppp)[]}]"
+s = "}{}"
 g = Stack(s)
 g.isEmpty()
