@@ -5,9 +5,9 @@ class Stack:
     self.var_string = var_string
     self.stack_front = []
     self.stack_empty = []
+    self.stack_list = []
 
-
-  def isEmpty(self):
+  def pair(self): # удаляет прные символы от центра. Реализована через строку
     verify = True
     symbol : str
     time_symbol : str
@@ -98,31 +98,47 @@ class Stack:
         print(f"ramins {self.var_string}, not find the paired.", f"Empty {self.stack_empty} and number: {len(self.stack_empty)}")
       return "Code 400"
 
-
+  def _isEmpty(self):
+   if self.stack_list != []:
+    response = False
+   else:
+    response = True
+    return True
 
   def push(self, symbols : str):
-    truth = True
-    stack_list = []
+    response = Stack._isEmpty(self)
 
-    if len(self.var_string) == 0 and symbols in "({[":
+    if response == True:
       symbols_list = [s for s in symbols]
-      stack_list.append(symbols_list)
+      self.stack_list = symbols_list[0]
       return
 
-    elif len(self.var_string) > 0 and symbols in ")}]":
-      stack_list = [l for l in self.var_string]
+    elif response == False:
       symbols_list = [s for s in symbols]
-      stack_list.append(symbols_list)
-
+      self.stack_list.append(symbols_list[0])
+      return
 
   def pop(self):
-    self.stack.pop()
+    response = Stack._isEmpty(self)
+
+    if response != True:
+      self.stack_list =  self.stack_list.pop()
+      return self.stack_list[-2 + 1 ]
+
+    else:
+      return self.stack_list
 
   def peek(self):
-    ...
+    response = Stack._isEmpty(self)
+
+    if response != True:
+      return self.stack_list[-2 + 1]
+
+    else:
+      return self.stack_list
 
   def size(self):
-    ...
+    return len(self.stack_list)
 
 s = "([]((([{}])){dds}))"
 # s = "[[{(pppp)[]}]"
