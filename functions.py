@@ -90,9 +90,6 @@ class Stack:
         if i >= bisic_leng_text - 1:
           print(f"ramins {self.var_string}, not find the paired.", f"Empty {self.stack_empty} and number: {len(self.stack_empty)}")
           verify = False
-        # elif len(self.var_string) != 0:
-        #   print(f"ramins {self.var_string}, not find the paired ")
-        #   exit()
     else:
       if len(self.var_string) == 0:
         print(f"ramins {self.var_string}, not find the paired.", f"Empty {self.stack_empty} and number: {len(self.stack_empty)}")
@@ -103,7 +100,7 @@ class Stack:
     response = False
    else:
     response = True
-    return True
+   return response
 
   def push(self, symbols : str):
     response = Stack._isEmpty(self)
@@ -140,8 +137,75 @@ class Stack:
   def size(self):
     return len(self.stack_list)
 
-s = "([]((([{}])){dds}))"
-# s = "[[{(pppp)[]}]"
+  def stackPair(self): # From work only the list. use other symbols cannot be. Only '{([]})'
+    result_pair_symbol = []
+    symbols_list = [s for s in "".join(reversed(self.var_string))]
+
+    self.stack_list = self.stack_list + (symbols_list)
+    truth = Stack._isEmpty(self)
+
+    if truth == False:
+      reverse_list = (self.stack_list)
+
+
+      while truth == False:
+        ind = 0
+        if ind == len(reverse_list) - 1:
+          break
+        for element in reverse_list:
+          for symbol in reverse_list:
+
+            if element == "]" and symbol == "[":
+              result_pair_symbol.append(element + symbol)
+              reverse_list.remove(reverse_list[reverse_list.index(element)])
+              reverse_list.remove(reverse_list[reverse_list.index(symbol)])
+              break
+
+            if element == "}" and symbol == "{":
+              result_pair_symbol.append(element + symbol)
+              reverse_list.remove(reverse_list[reverse_list.index(element)])
+              reverse_list.remove(reverse_list[reverse_list.index(symbol)])
+              break
+
+            if element == ")" and symbol == "(":
+              result_pair_symbol.append(element + symbol)
+              reverse_list.remove(reverse_list[reverse_list.index(element)])
+              reverse_list.remove(reverse_list[reverse_list.index(symbol)])
+              break
+
+            if len(reverse_list) < 2:
+              print(reverse_list, f"""{result_pair_symbol}
+               Symbols of stack's list no have pairs 
+              """)
+              truth = True
+
+  # Logic function
+        if reverse_list == []:
+          truth = True
+          print(f"Stack's list the simple empty, {result_pair_symbol}")
+          return reverse_list
+
+        if element in "[{(" and symbol == "" or\
+          element == None:
+          print(reverse_list, f"""
+                       Symbols of stack's list no have pairs {result_pair_symbol} 
+                      """)
+          return reverse_list
+
+        ind +=1
+        continue
+    else:
+      print(f"Stack's list the simple empty, {result_pair_symbol}")
+    print(result_pair_symbol)
+    return self.stack_list
+
+
+s = "([]((([{}])){}))"
+# s = "[[{()[]}]"
 # s = "}{}"
+# s = "{{[(])]}}"
+# s = "[[{())}]"
+
+l = ['[', '{', '[', '(', '(', '(', '(',']', '}', ']', ')', ')', ')', ')']
 g = Stack(s)
-g.push("pppp")
+g.stackPair()
