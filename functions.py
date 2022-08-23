@@ -146,12 +146,11 @@ class Stack:
     if truth == False:
       reverse_list = (self.stack_list)
 
-      ind = 0
-      while truth == False:
 
-        if ind == len(reverse_list) - 1:
-          break
+      while truth == False:
+        ind = 0
         for element in reverse_list:
+          # print(f"element: {element} -{ reverse_list.index(element)}")
           for symbol in reverse_list:
 
             if element == "]" and symbol == "[":
@@ -176,39 +175,44 @@ class Stack:
               print(reverse_list, f"""{result_pair_symbol}
                Symbols of stack's list no have pairs - Несбалансированно
               """)
-              truth = True
-
-          break
-  # Logic function
+              # truth = True
+            remains = reverse_list
+            # break
+          # continue
+        # Logic function
         if reverse_list == []:
-          truth = True
+          # truth = True
           print(f"Stack's list the simple empty, {result_pair_symbol} - Сбалансированно")
           return reverse_list
 
-        if element in "[{(" and symbol == "" or\
+        elif element in "[{(" and symbol == "" or\
           element == None or \
-          reverse_list[-2+1] == element and reverse_list[-2+1] == symbol or\
-          len(reverse_list) <= 2:
+          len(reverse_list) < 2: # reverse_list[-2+1] == element and reverse_list[-2+1] == symbol or\
           print(reverse_list, f"""
                Symbols of stack's list no have pairs {result_pair_symbol} - Несбалансированно
               """)
           return reverse_list
 
 
-        ind=0
-        continue
+        ind +=1
+        if ind == len(reverse_list) - 1 and reverse_list[-2+1] == element and reverse_list[-2+1] == symbol:
+          break
+
     else:
       print(f"Stack's list the simple empty, {result_pair_symbol} - Пусто")
-    print( result_pair_symbol)
+
+    print(remains, "//", result_pair_symbol)
+
     return self.stack_list
 
+if __name__ == "__main__":
 
-# s = "([]((([{}])){}))"
-# s = "[[{()[]}]"
-# s = "}{}"
-s = "{{[(])]}}"
-# s = "[[{())}]"
+  # s = "([]((([{}])){}))"
+  s = "[[{()[]}]"
+  s = "}{}"
+  s = "{{[(])]}}"
+  s = "[[{())}]"
 
-l = ['[', '{', '[', '(', '(', '(', '(',']', '}', ']', ')', ')', ')', ')']
-g = Stack(s)
-g.stackPair()
+  l = ['[', '{', '[', '(', '(', '(', '(',']', '}', ']', ')', ')', ')', ')']
+  g = Stack(s)
+  g.stackPair()
