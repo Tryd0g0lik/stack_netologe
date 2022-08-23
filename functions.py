@@ -140,16 +140,15 @@ class Stack:
   def stackPair(self): # From work only the list. use other symbols cannot be. Only '{([]})'
     result_pair_symbol = []
     symbols_list = [s for s in "".join(reversed(self.var_string))]
-
     self.stack_list = self.stack_list + (symbols_list)
     truth = Stack._isEmpty(self)
 
     if truth == False:
       reverse_list = (self.stack_list)
 
-
+      ind = 0
       while truth == False:
-        ind = 0
+
         if ind == len(reverse_list) - 1:
           break
         for element in reverse_list:
@@ -175,35 +174,39 @@ class Stack:
 
             if len(reverse_list) < 2:
               print(reverse_list, f"""{result_pair_symbol}
-               Symbols of stack's list no have pairs 
+               Symbols of stack's list no have pairs - Несбалансированно
               """)
               truth = True
 
+          break
   # Logic function
         if reverse_list == []:
           truth = True
-          print(f"Stack's list the simple empty, {result_pair_symbol}")
+          print(f"Stack's list the simple empty, {result_pair_symbol} - Сбалансированно")
           return reverse_list
 
         if element in "[{(" and symbol == "" or\
-          element == None:
+          element == None or \
+          reverse_list[-2+1] == element and reverse_list[-2+1] == symbol or\
+          len(reverse_list) <= 2:
           print(reverse_list, f"""
-                       Symbols of stack's list no have pairs {result_pair_symbol} 
-                      """)
+               Symbols of stack's list no have pairs {result_pair_symbol} - Несбалансированно
+              """)
           return reverse_list
 
-        ind +=1
+
+        ind=0
         continue
     else:
-      print(f"Stack's list the simple empty, {result_pair_symbol}")
-    print(result_pair_symbol)
+      print(f"Stack's list the simple empty, {result_pair_symbol} - Пусто")
+    print( result_pair_symbol)
     return self.stack_list
 
 
-s = "([]((([{}])){}))"
+# s = "([]((([{}])){}))"
 # s = "[[{()[]}]"
 # s = "}{}"
-# s = "{{[(])]}}"
+s = "{{[(])]}}"
 # s = "[[{())}]"
 
 l = ['[', '{', '[', '(', '(', '(', '(',']', '}', ']', ')', ')', ')', ')']
