@@ -7,7 +7,7 @@ class Stack:
     self.stack_empty = []
     self.stack_list = []
 
-  def pair(self): # удаляет прные символы от центра. Реализована через строку
+  def pair(self):
     verify = True
     symbol : str
     time_symbol : str
@@ -150,7 +150,6 @@ class Stack:
       while truth == False:
         ind = 0
         for element in reverse_list:
-          # print(f"element: {element} -{ reverse_list.index(element)}")
           for symbol in reverse_list:
 
             if element == "]" and symbol == "[":
@@ -175,11 +174,8 @@ class Stack:
               print(reverse_list, f"""{result_pair_symbol}
                Symbols of stack's list no have pairs - Несбалансированно
               """)
-              # truth = True
             remains = reverse_list
-            # break
-          # continue
-        # Logic function
+
         if reverse_list == []:
           # truth = True
           print(f"Stack's list the simple empty, {result_pair_symbol} - Сбалансированно")
@@ -187,7 +183,7 @@ class Stack:
 
         elif element in "[{(" and symbol == "" or\
           element == None or \
-          len(reverse_list) < 2: # reverse_list[-2+1] == element and reverse_list[-2+1] == symbol or\
+          len(reverse_list) < 2:
           print(reverse_list, f"""
                Symbols of stack's list no have pairs {result_pair_symbol} - Несбалансированно
               """)
